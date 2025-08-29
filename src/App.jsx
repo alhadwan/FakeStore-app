@@ -1,4 +1,5 @@
 // import { useState } from "react";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./Components/HomePage";
@@ -10,15 +11,24 @@ import AddToCart from "./Components/AddToCart";
 import "./App.css";
 
 function App() {
+  const [cart, setCart] = useState([]);
+  const [quantity, setQuantity] = useState(1);
   return (
     <div>
       <Navigation />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductListing />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route
+          path="/products/:id"
+          element={<ProductDetails cart={cart} setCart={setCart} quantity={quantity} setQuantity={setQuantity} />}
+        />
         <Route path="/products/add" element={<AddProduct />} />
-        <Route path="/products/addToCart" element={<AddToCart />} />
+        <Route
+          path="/products/addToCart"
+          element={<AddToCart cart={cart} setCart={setCart} quantity={quantity} setQuantity={setQuantity} />}
+        />
       </Routes>
     </div>
   );

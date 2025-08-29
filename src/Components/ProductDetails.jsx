@@ -4,11 +4,22 @@ import { useEffect, useState } from "react";
 import { Card, Row, Col, Container, Button, ListGroup } from "react-bootstrap";
 import ProductRating from "./ProductRating";
 
-const ProductDetails = () => {
-  const [quantity, setQuantity] = useState(1);
+const ProductDetails = ({ cart, setCart, quantity, setQuantity }) => {
   const [productDetails, setProductDetails] = useState("");
   const { id } = useParams();
   const taxRate = 0.07;
+
+  const handleClick = () => {
+    const item = {
+      id: productDetails.id,
+      image: productDetails.image,
+      title: productDetails.title,
+      price: productDetails.price,
+      quantity,
+    };
+    setCart([...cart, item]);
+    console.log(...cart);
+  };
 
   const handleChange = (e) => {
     setQuantity(e.target.value);
@@ -90,7 +101,9 @@ const ProductDetails = () => {
                 ).toFixed(2)}
               </ListGroup.Item>
               <ListGroup.Item>
-                <Button variant="primary w-100">Add to Cart</Button>
+                <Button variant="primary w-100" onClick={handleClick}>
+                  Add to Cart
+                </Button>
               </ListGroup.Item>
             </ListGroup>
           </Col>
