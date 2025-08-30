@@ -6,6 +6,7 @@ import ProductRating from "./ProductRating";
 
 const ProductDetails = ({ cart, setCart, quantity, setQuantity }) => {
   const [productDetails, setProductDetails] = useState("");
+  const [success, setSuccess] = useState(false);
   const { id } = useParams();
   const taxRate = 0.07;
 
@@ -18,7 +19,7 @@ const ProductDetails = ({ cart, setCart, quantity, setQuantity }) => {
       quantity,
     };
     setCart([...cart, item]);
-    console.log(...cart);
+    setSuccess(true);
   };
 
   const handleChange = (e) => {
@@ -59,7 +60,7 @@ const ProductDetails = ({ cart, setCart, quantity, setQuantity }) => {
               alt={productDetails.title}
             />
           </Col>
-          <Col md={4}>
+          <Col md={4} className="mt-4">
             <h1>{productDetails.title}</h1>
             <p>{productDetails.description}</p>
             {/* <p>Price: ${productDetails.price}</p> */}
@@ -105,6 +106,9 @@ const ProductDetails = ({ cart, setCart, quantity, setQuantity }) => {
                   Add to Cart
                 </Button>
               </ListGroup.Item>
+              {success && (
+                <p className="text-success">Item added to cart successfully!</p>
+              )}
             </ListGroup>
           </Col>
         </Row>

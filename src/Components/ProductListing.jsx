@@ -10,8 +10,8 @@ import {
   ListGroup,
 } from "react-bootstrap";
 
-const ProductListing = () => {
-  const [products, setProducts] = useState([]);
+const ProductListing = ({ products, setProducts }) => {
+  // const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const ProductListing = () => {
   }, []);
 
   return (
-    <Container className="d-flex flex-row justify-content-center align-items-center py-4">
+    <Container >
       <Row xs={1} sm={2} md={3} lg={4} className="g-4">
         {products.map((p) => (
           <Col key={p.id}>

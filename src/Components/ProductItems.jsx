@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Container,
@@ -10,14 +10,14 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-
 import ProductRating from "./ProductRating";
+import DeleteProduct from "./DeleteProduct";
 
 const ProductItems = ({ productItems }) => {
-  console.log(productItems);
+  const [success, setSuccess] = useState(false);
   return (
     <Card
-      className="h-100 rounded-4"
+      className="h-100 rounded-4 "
       style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}
     >
       <Card.Img
@@ -63,7 +63,7 @@ const ProductItems = ({ productItems }) => {
         </ListGroup.Item>
       </ListGroup>
 
-      <Card.Body>
+      <Card.Body className="d-flex justify-content-between gap-3 text-center">
         <Button
           as={Link}
           to={`/products/${productItems.id}`}
@@ -73,7 +73,25 @@ const ProductItems = ({ productItems }) => {
         >
           Details
         </Button>
+        <Button
+          as={Link}
+          to={`/products/edit/${productItems.id}`}
+          variant="warning"
+          // size="lg"
+          className="w-100"
+        >
+          Edit
+        </Button>
+        <DeleteProduct
+          productId={productItems.id}
+          onSuccess={() => setSuccess(true)}
+        />
       </Card.Body>
+      {success && (
+        <div className="text-success mt-2 text-center">
+          Product deleted successfully!
+        </div>
+      )}
     </Card>
   );
 };

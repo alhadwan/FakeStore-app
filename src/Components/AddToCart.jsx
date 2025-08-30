@@ -1,11 +1,12 @@
 import React from "react";
 import { Card, Row, Col, Container, Button, ListGroup } from "react-bootstrap";
 const AddToCart = ({ cart, setCart, quantity, setQuantity }) => {
-  console.log(cart);
+  // console.log(cart);
 
   const handleRemove = (id) => {
     const updatedCart = cart.filter((item) => item.id !== id);
     setCart(updatedCart);
+    console.log(`item ${id} deleted`);
   };
 
   const handleChange = (e) => {
@@ -13,7 +14,6 @@ const AddToCart = ({ cart, setCart, quantity, setQuantity }) => {
   };
   return (
     <div>
-      <h2>Shopping Cart</h2>
       <ul style={{ listStyleType: "none", padding: 5 }}>
         {cart.map((item, index) => (
           <li key={index}>
@@ -31,11 +31,11 @@ const AddToCart = ({ cart, setCart, quantity, setQuantity }) => {
                   alt={item.title}
                 />
               </Col>
-              <Col md={3} className="fw-bold fs-5">
+              <Col md={3} className="fw-bold fs-5 mt-2">
                 {item.title} -{" "}
                 {quantity && `$${(item.price * quantity).toFixed(2)}`}
               </Col>
-              <Col md={3}>
+              <Col md={3} mt-2>
                 <select
                   className="form-select fw-bold fs-5"
                   aria-label="Default select example"
@@ -48,7 +48,7 @@ const AddToCart = ({ cart, setCart, quantity, setQuantity }) => {
                   <option value="5">5</option>
                 </select>
               </Col>
-              <Col md={3}>
+              <Col md={3} mt-3>
                 <Button variant="danger" onClick={() => handleRemove(item.id)}>
                   Remove
                 </Button>

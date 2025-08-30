@@ -8,26 +8,53 @@ import ProductListing from "./Components/ProductListing";
 import ProductDetails from "./Components/ProductDetails";
 import AddProduct from "./Components/AddProduct";
 import AddToCart from "./Components/AddToCart";
+import EditProduct from "./Components/EditProduct";
+
 import "./App.css";
 
 function App() {
   const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [products, setProducts] = useState([]);
   return (
     <div>
       <Navigation />
-
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductListing />} />
+        <Route
+          path="/products"
+          element={
+            <ProductListing products={products} setProducts={setProducts} />
+          }
+        />
         <Route
           path="/products/:id"
-          element={<ProductDetails cart={cart} setCart={setCart} quantity={quantity} setQuantity={setQuantity} />}
+          element={
+            <ProductDetails
+              cart={cart}
+              setCart={setCart}
+              quantity={quantity}
+              setQuantity={setQuantity}
+            />
+          }
         />
         <Route path="/products/add" element={<AddProduct />} />
         <Route
           path="/products/addToCart"
-          element={<AddToCart cart={cart} setCart={setCart} quantity={quantity} setQuantity={setQuantity} />}
+          element={
+            <AddToCart
+              cart={cart}
+              setCart={setCart}
+              quantity={quantity}
+              setQuantity={setQuantity}
+            />
+          }
+        />
+        <Route
+          path="/products/edit/:id"
+          element={
+            <EditProduct products={products} setProducts={setProducts} />
+          }
         />
       </Routes>
     </div>
